@@ -1,8 +1,28 @@
 import * as d3 from 'd3';
 import { setupCanvas, setupControls } from './control.js';
 
+
 // Load the CSV data
 d3.csv('../data/data.csv').then(data => {
+
+    const languageCounts = d3.rollup(
+        data,
+        v => v.length,
+        d => d.language // Replace 'language' with the actual column name for language in your CSV
+    );
+
+    // Convert the Map to an array for easier processing
+    const languagePopularity = Array.from(languageCounts, ([language, count]) => ({ language, count }));
+
+    // Sort the array by popularity in descending order
+    languagePopularity.sort((a, b) => b.count - a.count);
+
+    console.log('Sorted Language Popularity:', languagePopularity);
+    // Add language labels to the array
+    languagePopularity.forEach(item => {
+        console.log(`Language: ${item.language}, Count: ${item.count}`);
+    });
+
     // Parse the data
     const parsedData = data.map(d => ({
         x: +d.x, // Replace 'x' with the actual column name for x-axis
