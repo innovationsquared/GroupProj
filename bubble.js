@@ -1,9 +1,11 @@
-import * as d3 from 'd3';
-import { setupCanvas, setupControls } from './control.js'; // this has to be given as they want a svg to control the graphs
-
-
-d3.csv('../data/data.csv').then(data => {
-
+class Bubble {
+constructor(data, w, h, con) {
+    this.con = con;
+    this.data = data;
+    
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    const width = w - margin.left - margin.right;
+    const height = h - margin.top - margin.bottom;
     const languageCounts = d3.rollup(
         data,
         v => v.length,
@@ -25,10 +27,6 @@ d3.csv('../data/data.csv').then(data => {
         r: +d.r,
         category: d.category 
     }));
-
-    
-    const width = 800;
-    const height = 600;
 
     
     const svg = d3.select('#chart-container')
@@ -74,6 +72,10 @@ d3.csv('../data/data.csv').then(data => {
 
     
     setupControls(svg, parsedData, xScale, yScale, rScale);
-}).catch(error => {
-    console.error('Error loading the CSV data:', error);
-});
+
+        }
+
+
+
+
+}
