@@ -15,9 +15,18 @@
 </head>
 
 <body>
+
+    <svg id="radVizSvg"></svg>
+
     <script>
-        d3.csv('repository_data.csv').then(data => {
-            new Control(data);
+        d3.csv('./data/github_dataset.csv').then(data => {
+            if (data) {
+                console.log("Data loaded successfully", data);
+                new Control(data);
+            }
+            else {
+                console.error("Failed to load data");
+            }
         });
     </script>
 </body>

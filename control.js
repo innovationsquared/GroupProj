@@ -165,7 +165,7 @@ class Control {
 
         // this.Bubble = new Bubble(data, bubbleSvg, this);
         // this.Pie = new Pie(data, pieSvg, this);
-        // this.RadViz = new RadViz(data, radVizSvg, this);
+        this.RadViz = new RadViz(data, radVizSvg, this);
         // this.Bar = new Bar(data, barSvg, this);
         
     }
