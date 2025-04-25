@@ -17,9 +17,12 @@
 <body>
 
     <svg id="radVizSvg"></svg>
+    <svg id="bubbleSvg"></svg>
+    <svg id="barSvg"></svg>
+    <svg id="pieSvg"></svg>
 
     <script>
-        d3.csv('./data/github_dataset.csv').then(data => {
+        d3.csv('./data/repository_data.csv').then(data => {
             if (data) {
                 console.log("Data loaded successfully", data);
                 new Control(data);
