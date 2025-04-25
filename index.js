@@ -2,7 +2,19 @@
 const express = require('express');
 const app = express();
 const PORT = 8000;
-const data = require('./data/github_dataset.csv');
+const fs = require('fs');
+const csv = require('csv-parser');
+
+let data = {};
+fs.createReadStream('./data/github_dataset.csv')
+  .pipe(csv())
+  .on('data', (row) => {
+    const key = row[Object.keys(row)[0]]; // First column as key
+    data[key] = row;
+  })
+  .on('end', () => {
+    console.log('CSV file successfully processed');
+  });
 console.log(data);
 
 app.use(express.static('public'));
