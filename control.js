@@ -159,14 +159,14 @@ class Control {
         Create the instance for each class here
         Need to pass data, size, and this control object to each class
         For example, 
-            this.Pie = new Pie(data, size, this);
+            this.Pie = new Pie(data, svg, size, this);
         Set up the CSS for size and layout in the style.css file
         */
 
-        // this.Bubble = new Bubble(data, bubbleSvg, this);
-        // this.Pie = new Pie(data, pieSvg, this);
-        // this.RadViz = new RadViz(data, radVizSvg, this);
-        // this.Bar = new Bar(data, barSvg, this);
+        // this.Bubble = new Bubble(data, bubbleSvg, size.bubbleSize, this);
+        // this.Pie = new Pie(data, pieSvg, size.pieSize, this);
+        this.RadViz = new RadViz(data, radVizSvg, size.radVizSize, this);
+        // this.Bar = new Bar(data, barSvg, size.barSize, this);
         
     }
 
