@@ -323,13 +323,13 @@ class RadViz {
         const legend = svg
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', `translate(${size / 2 - 250}, 20)`);
+            .attr('transform', `translate(${-size.width/2 + size.margin}, ${-size.height/2 + size.margin})`);
 
             legend.selectAll('rect')
             .data(legendData)
             .enter()
             .append('rect')
-            .attr('x', (d, i) => i * 90)
+            .attr('x', (d, i) => i * size.width / 6)
             .attr('width', 12)
             .attr('height', 12)
             .attr('fill', d => languageColorScale(d))
@@ -357,7 +357,7 @@ class RadViz {
             .data(legendData)
             .enter()
             .append('text')
-            .attr('x', (d, i) => i * 90 + 18)
+            .attr('x', (d, i) => i * size.width / 6 + 18)
             .attr('y', 10)
             .text(d => d)
             .attr('alignment-baseline', 'middle')

@@ -12,18 +12,22 @@ class Control {
             margin: 10,
 
             pieSize:{
+                margin: 10,
                 width:500,
                 height:500
             },
             barSize:{
+                margin: 10,
                 width:500,
                 height:500
             },
             bubbleSize:{
+                margin: 10,
                 width: 1000,
                 height:500
             },
             radVizSize:{
+                margin: 10,
                 width: 500,
                 height: 500
             }
