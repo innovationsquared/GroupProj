@@ -53,24 +53,26 @@ class Bubble {
         .attr('fill', d => colorScale(d.language))
         .attr('stroke', 'black')
         .attr('opacity', 0.7);
-  
-      const labels = svg.selectAll('text')
-        .data(nodes)
-        .join('text')
-        .text(d => d.language)
-        .attr('font-size', '12px')
-        .attr('text-anchor', 'middle')
-        .attr('fill', 'black');
-  
-      function ticked() {
-        node
-          .attr('cx', d => d.x)
-          .attr('cy', d => d.y);
-  
-        labels
-          .attr('x', d => d.x)
-          .attr('y', d => d.y + 4); // Slight offset for centering
-      }
-    }
-  }
-  
+
+    
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+
+    svg.append('g')
+        .attr('transform', `translate(0, ${height - 50})`)
+        .call(xAxis);
+
+    svg.append('g')
+        .attr('transform', `translate(50, 0)`)
+        .call(yAxis);
+
+    
+    setupControls(svg, parsedData, xScale, yScale, rScale);
+
+        }
+
+        // mouse events for the bubbles to enlarge and information maybe.s
+    // just needs to enlarge the bubble that is being hovered.
+
+
+}
