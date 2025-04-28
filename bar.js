@@ -33,3 +33,50 @@
 //         });
 //     })
 //     .catch(error => console.error('Error loading data:', error));
+
+class Bar {
+    constructor(data, svg, size, control) {
+        this.data = data;
+        this.svg = svg;
+        this.size = size;
+        this.control = control;
+
+        const width = this.size.width;
+        const height = this.size.height;
+
+        const parsedData = this.data.map((d, i) => ({
+            index: i,
+            label: d.Label,
+            value: +d.Value
+        }));
+
+        const x = d3.scaleBand()
+            .domain(parsedData.map(d => d.label))
+            .range([0, width])
+            .padding(0.1);
+
+        const y = d3.scaleLinear()
+            .domain([0, d3.max(parsedData, d => d.value)])
+            .nice()
+            .range([height, 0]);
+
+        this.svg.append('g')
+            .attr('transform', `translate(0,${height})`)
+            .call(d3.axisBottom(x));
+
+        this.svg.append('g')
+            .call(d3.axisLeft(y));
+
+        this.svg.selectAll('.bar')
+            .data(parsedData)
+            .enter()
+            .append('rect')
+            .attr('class', 'bar')
+            .attr('x', d => x(d.label))
+            .attr('y', d => y(d.value))
+            .attr('width', x.bandwidth())
+            .attr('height', d => height - y(d.value))
+            .attr('fill', 'steelblue');
+        }
+    }
+
