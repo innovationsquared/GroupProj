@@ -167,7 +167,7 @@ class Control {
         Set up the CSS for size and layout in the style.css file
         */
 
-        // this.Bubble = new Bubble(data, bubbleSvg, size.bubbleSize, this);
+        this.Bubble = new Bubble(data, bubbleSvg, size.bubbleSize, this);
         // this.Pie = new Pie(data, pieSvg, size.pieSize, this);
         this.RadViz = new RadViz(data, radVizSvg, size.radVizSize, this);
         // this.Bar = new Bar(data, barSvg, size.barSize, this);
