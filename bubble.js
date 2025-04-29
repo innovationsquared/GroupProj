@@ -72,7 +72,7 @@ class Bubble {
       .on('mouseover', (event, d) => {
 
         d3.select(event.currentTarget)
-          .attr('stroke-width', 3);
+          .attr('stroke-width', 4);
 
         tooltip
           .style('opacity', 1)
@@ -103,12 +103,35 @@ class Bubble {
         })
       );
 
+    // Add a search box for highlighting bubbles
+    const searchBox = this.svg.append('foreignObject')
+      .attr('x', 10)
+      .attr('y', 10)
+      .attr('width', 200)
+      .attr('height', 50)
+      .append('xhtml:div')
+      .style('font', '12px sans-serif')
+      .html('<input type="text" id="search" placeholder="Search language..." style="width: 180px; padding: 5px;"/>');
+
+    d3.select('#search').on('input', function () {
+      const searchTerm = this.value.toLowerCase();
+
+      node
+        .attr('stroke', d => d.language.toLowerCase().includes(searchTerm) ? 'red' : 'black')
+        .attr('stroke-width', d => d.language.toLowerCase().includes(searchTerm) ? 3 : 1);
+   
+      if (searchTerm === '') {
+      node
+        .attr('stroke', 'black')
+        .attr('stroke-width', 1);
+      }
+    });
     function ticked() {
       node
+
         .attr('cx', d => d.x)
         .attr('cy', d => d.y);
     }
-
 
     const tooltip = d3.select('body')
       .append('div')
@@ -118,7 +141,7 @@ class Bubble {
       .style('padding', '6px')
       .style('font', '12px sans-serif')
       .style('background', 'lightsteelblue')
-      .style('border', '0px')
+      .style('border', '1px')
       .style('border-radius', '8px')
       .style('pointer-events', 'none')
       .style('opacity', 0);
