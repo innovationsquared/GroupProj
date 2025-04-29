@@ -1,11 +1,12 @@
 class Bubble {
-    constructor(data, w, h, con) {
+    constructor(data, svg, size, con) {
       this.con = con;
       this.data = data;
+      this.svg = svg;
   
       const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-      const width = w - margin.left - margin.right;
-      const height = h - margin.top - margin.bottom;
+      const width = size.width;
+      const height = size.height;
  
       const filtered = data.filter(d => d.languages_used && d.languages_used !== 'NULL');
   
@@ -32,8 +33,8 @@ class Bubble {
       const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
         .domain(languageData.map(d => d.primary_language));
   
-      const svg = d3.select(this.con.Bubble)
-        .append('svg')
+        
+        svg.append('svg')
         .attr('width', width)
         .attr('height', height);
   
@@ -50,7 +51,7 @@ class Bubble {
         .force('collision', d3.forceCollide().radius(d => d.radius + 2))
         .on('tick', ticked);
   
-      const node = svg.selectAll('circle')
+      const node = this.svg.selectAll('circle')
         .data(nodes)
         .join('circle')
         .attr('r', d => d.radius)
