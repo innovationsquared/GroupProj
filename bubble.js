@@ -28,7 +28,7 @@ class Bubble {
 
       const radiusScale = d3.scaleSqrt()
         .domain([0, d3.max(languageData, d => d.count)])
-        .range([10, 50]);
+        .range([10, 20]);
   
       const colorScale = d3.scaleOrdinal(d3.schemeCategory10)
         .domain(languageData.map(d => d.primary_language));
@@ -74,7 +74,23 @@ class Bubble {
           d3.select(event.currentTarget)
             .attr('stroke-width', 1);
           tooltip.style('opacity', 0);
-        });
+        })
+        .call(d3.drag()
+                        .on('start', function (event) {
+                            if (!event.active) simulation.alphaTarget(0.3).restart();
+                            event.subject.fx = event.subject.x;
+                            event.subject.fy = event.subject.y;
+                        })
+                        .on('drag', function (event) {
+                            event.subject.fx = event.x;
+                            event.subject.fy = event.y;
+                        })
+                        .on('end', function (event) {
+                            if (!event.active) simulation.alphaTarget(0);
+                            event.subject.fx = null;
+                            event.subject.fy = null;
+                        })
+                    );
 
       function ticked() {
         node
