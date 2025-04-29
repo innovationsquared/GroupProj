@@ -1,3 +1,4 @@
+
 // import Chart from 'chart.js/auto';
 // import Papa from 'papaparse';
 
@@ -44,39 +45,44 @@ class Bar {
         const width = this.size.width;
         const height = this.size.height;
 
-        const parsedData = this.data.map((d, i) => ({
-            index: i,
-            label: d.Label,
-            value: +d.Value
-        }));
+        const licenseCounts = d3.rollups(data, v=>v.length, d=>d.license || 'None');
+        const licenses = licenseCounts.map(d=>d[0]);
+        const counts = licenseCounts.map(d=>d[1]);
 
-        const x = d3.scaleBand()
-            .domain(parsedData.map(d => d.label))
+        console.log(licenseCounts);
+        const xScale = d3.scaleBand()
+            .domain(licenses)
             .range([0, width])
-            .padding(0.1);
+            .padding(0.2);
 
-        const y = d3.scaleLinear()
-            .domain([0, d3.max(parsedData, d => d.value)])
-            .nice()
-            .range([height, 0]);
+        const yScale = d3.scaleLinear()
+            .domain([0,d3.max(counts)])
+            .range([height - 40, 0]);
 
-        this.svg.append('g')
-            .attr('transform', `translate(0,${height})`)
-            .call(d3.axisBottom(x));
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale);
 
-        this.svg.append('g')
-            .call(d3.axisLeft(y));
+        svg.append('g')
+            .attr('transform', `translate(${0}, ${height - 40})`)  
+            .call(xAxis)
+            .attr("transform", "rotate(-45)")
+            .style("text-anchor","end");
 
-        this.svg.selectAll('.bar')
-            .data(parsedData)
+
+
+        svg.append('g')
+            .attr('transform', `translate(0,0)`)
+            .call(yAxis);
+
+        svg.selectAll('rect')
+            .data(licenseCounts)
             .enter()
             .append('rect')
-            .attr('class', 'bar')
-            .attr('x', d => x(d.label))
-            .attr('y', d => y(d.value))
-            .attr('width', x.bandwidth())
-            .attr('height', d => height - y(d.value))
+            .attr('x', d=>xScale(d[0]))
+            .attr('y', d=>yScale(d[1]))
+            .attr('width', xScale.bandwidth())
+            .attr('height', d=> height - 40 - yScale(d[1]))
             .attr('fill', 'steelblue');
-        }
     }
+}
 
