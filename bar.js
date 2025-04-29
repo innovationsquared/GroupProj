@@ -45,7 +45,11 @@ class Bar {
         const width = this.size.width;
         const height = this.size.height;
 
-        const licenseCounts = d3.rollups(data, v=>v.length, d=>d.license || 'None');
+        const licenseCounts = d3.rollups(
+            data.map(d=> ({...d, licence: d.licence || 'None'})),
+            v=>v.length,
+            d => d.licence
+        );
         const licenses = licenseCounts.map(d=>d[0]);
         const counts = licenseCounts.map(d=>d[1]);
 
