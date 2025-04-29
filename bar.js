@@ -75,7 +75,7 @@ class Bar {
             .attr('transform', `translate(${0}, ${height - 40})`)  
             .call(xAxis)
             .selectAll('text')
-            .attr("transform", "rotate(-45)")
+            .attr("transform", "rotate(-30)")
             .style("text-anchor","end");
 
 
@@ -93,6 +93,17 @@ class Bar {
             .attr('width', xScale.bandwidth())
             .attr('height', d=> height - 40 - yScale(d[1]))
             .attr('fill', d => colorScale(d[0]));
+        svg.selectAll('text.count-label')
+            .data(licenseCounts)
+            .enter()
+            .append('text')
+            .attr('class', 'count-label')
+            .attr('x', d=>xScale(d[0]))
+            .attr('y', d=>yScale(d[1] - 0))
+            .attr('text-anchor', 'middle')
+            .attr('font-size', '12px')
+            .attr('fill', 'black')
+            .text(d=>d[1]);
     }
 }
 
