@@ -46,6 +46,7 @@ class Bar {
         const height = this.size.height;
 
         const licenseCounts = d3.rollups(
+            //these dumb brits spell license wrong
             data.map(d=> ({...d, licence: d.licence || 'None'})),
             v=>v.length,
             d => d.licence
@@ -62,6 +63,10 @@ class Bar {
         const yScale = d3.scaleLinear()
             .domain([0,d3.max(counts)])
             .range([height - 40, 0]);
+
+        const colorScale = d3.scaleOrdinal()
+            .domain(licenses)
+            .range(d3.schemeCategory10);
 
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3.axisLeft(yScale);
@@ -86,7 +91,7 @@ class Bar {
             .attr('y', d=>yScale(d[1]))
             .attr('width', xScale.bandwidth())
             .attr('height', d=> height - 40 - yScale(d[1]))
-            .attr('fill', 'steelblue');
+            .attr('fill', d => colorScale(d[0]));
     }
 }
 
