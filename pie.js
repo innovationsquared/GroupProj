@@ -2,6 +2,7 @@ class Pie {
     constructor(data, svg, size, con) {
         this.con = con;
         this.data = data;
+        this.svg = svg; // Store svg as a property
 
         const languageCounts = d3.rollups(
             data,
@@ -59,7 +60,7 @@ class Pie {
                 tooltip.style('opacity', 0);
             })
             .on('click', (event, d) => {
-                this.con.filterByLanguage(d.data[0]);
+                this.con.Select(d.data[0]);
             });
 
         const labelArc = d3.arc()
@@ -125,12 +126,12 @@ class Pie {
             .style('opacity', 0);
     }
 
-    highlight(language) {
+    Highlight(language) {
         this.svg.selectAll('path.slice')
             .style('opacity', d => d.data[0] === language ? 1 : 0.5);
     }
-
-    unhighlight() {
+    
+    UnHighlight() {
         this.svg.selectAll('path.slice')
             .style('opacity', 0.8);
     }

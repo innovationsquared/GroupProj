@@ -224,23 +224,23 @@ class Control {
 
 
 
-    /**
-     * INTERACTION METHODS
-     */
-    /* 
-    Define methods here to respond to the mouse operation (will be called by each visualization class)
-    When theses methods are called, call corresponding methods in each visualization class to update the chart
-    */
+    // /**
+    //  * INTERACTION METHODS
+    //  */
+    // /* 
+    // Define methods here to respond to the mouse operation (will be called by each visualization class)
+    // When theses methods are called, call corresponding methods in each visualization class to update the chart
+    // */
     
     Select(variety){
         if(this.Pie.highlightedColor!=variety){
             this.Pie.Highlight(variety);
-            this.PCord.Filter(variety);
-            this.RadViz.Filter(variety);
+            // this.PCord.Filter(variety); // Comment out or remove
+            this.RadViz.Filter(variety); 
         }
         else{
             this.Pie.UnHighlight();
-            this.PCord.UnFilter();
+            // this.PCord.UnFilter(); // Comment out or remove
             this.RadViz.UnFilter();
         }
     }
