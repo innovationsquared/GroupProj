@@ -1,112 +1,118 @@
+/**
+ * LAYOUT
+ */
+
+/**
+ * OFFSET of each element
+ */
+const HeaderHeight = 50; // height of the header
+const offsets = {
+    pie: {
+        top: HeaderHeight+500,
+        left: 0
+    },
+    bar: {
+        top: HeaderHeight+0,
+        left: 0
+    },
+    bubble: {
+        top:HeaderHeight+1000,
+        left: 0
+    },
+    radViz: {
+        top: HeaderHeight+500,
+        left: 500
+    }  
+}
+
+/**
+ * layout Size
+ */
+const size = {
+    /*
+    Define the size of the layout here
+    */
+    width: 1000,
+    height: 2000,
+    margin: 10
+};
+
+/**
+ * VIZUALIZATION SIZES 
+ */
+const pieSize ={
+    width: size.width/2,
+    height: size.width/2
+}
+const barSize ={
+    width: size.width,
+    height: size.width/2
+}
+const bubbleSize ={
+    width: size.width,
+    height: size.width/2
+}
+const radVizSize ={
+    width: size.width/2,
+    height: size.width/2,
+}
+
+/**
+ * margins
+ */
+const margins = {
+    pie:{
+        top: size.margin,
+        bottom : size.margin,
+        left: size.margin,
+        right : size.margin
+    },
+    bar:{
+        top: size.margin,
+        bottom : size.margin * 12,
+        left: size.margin * 2.5,
+        right : size.margin
+    },
+    bubble:{
+        top: size.margin,
+        bottom : size.margin,
+        left: size.margin,
+        right : size.margin
+    },
+    radViz:{
+        top: size.margin,
+        bottom : size.margin,
+        left: size.margin,
+        right : size.margin
+    }
+}
+
+/**
+ * unpaded sizes
+ */
+const unpaded_pieSize ={
+    width: pieSize.width - margins.pie.left - margins.pie.right,
+    height: pieSize.height - margins.pie.top - margins.pie.bottom
+}
+const unpaded_barSize ={
+    width: barSize.width - margins.bar.left - margins.bar.right,
+    height: barSize.height - margins.bar.top - margins.bar.bottom,
+}
+const unpaded_bubbleSize ={
+    width: bubbleSize.width - margins.bubble.left - margins.bubble.right,
+    height: bubbleSize.height - margins.bubble.top - margins.bubble.bottom,
+}
+const unpaded_radVizSize ={
+    width: radVizSize.width - margins.radViz.left - margins.radViz.right,
+    height: radVizSize.height - margins.radViz.top - margins.radViz.bottom,
+}
+
 class Control {
     constructor(data) {
         /**
-         * LAYOUT
+         * Public Variables
          */
-
-        /**
-         * OFFSET of each visualization
-         */
-        const offsets = {
-            pie: {
-                top: 500,
-                left: 0
-            },
-            bar: {
-                top: 0,
-                left: 0
-            },
-            bubble: {
-                top: 1000,
-                left: 0
-            },
-            radViz: {
-                top: 500,
-                left: 500
-            }  
-        }
-
-        /**
-         * layout Size
-         */
-        const size = {
-            /*
-            Define the size of the layout here
-            */
-            width: 1000,
-            height: 2000,
-            margin: 10
-        };
-
-        /**
-         * VIZUALIZATION SIZES 
-         */
-        const pieSize ={
-            width: size.width/2,
-            height: size.width/2
-        }
-        const barSize ={
-            width: size.width,
-            height: size.width/2
-        }
-        const bubbleSize ={
-            width: size.width,
-            height: size.width/2
-        }
-        const radVizSize ={
-            width: size.width/2,
-            height: size.width/2,
-        }
-
-        /**
-         * margins
-         */
-        const margins = {
-            pie:{
-                top: size.margin,
-                bottom : size.margin,
-                left: size.margin,
-                right : size.margin
-            },
-            bar:{
-                top: size.margin,
-                bottom : size.margin * 12,
-                left: size.margin * 2.5,
-                right : size.margin
-            },
-            bubble:{
-                top: size.margin,
-                bottom : size.margin,
-                left: size.margin,
-                right : size.margin
-            },
-            radViz:{
-                top: size.margin,
-                bottom : size.margin,
-                left: size.margin,
-                right : size.margin
-            }
-        }
-
-        /**
-         * unpaded sizes
-         */
-        const unpaded_pieSize ={
-            width: pieSize.width - margins.pie.left - margins.pie.right,
-            height: pieSize.height - margins.pie.top - margins.pie.bottom
-        }
-        const unpaded_barSize ={
-            width: barSize.width - margins.bar.left - margins.bar.right,
-            height: barSize.height - margins.bar.top - margins.bar.bottom,
-        }
-        const unpaded_bubbleSize ={
-            width: bubbleSize.width - margins.bubble.left - margins.bubble.right,
-            height: bubbleSize.height - margins.bubble.top - margins.bubble.bottom,
-        }
-        const unpaded_radVizSize ={
-            width: radVizSize.width - margins.radViz.left - margins.radViz.right,
-            height: radVizSize.height - margins.radViz.top - margins.radViz.bottom,
-        }
+        this.data = data
 
         /**
          * SVGS
@@ -126,7 +132,7 @@ class Control {
         /**
          * pieSVG
          */
-        const pieSvg = this.root.append('div')
+        this.pieSvg = this.root.append('div')
             .attr('id', 'pie')//tag used for CSS
             .style('width', `${pieSize.width}px`)
             .style('height', `${pieSize.height}px`)
@@ -143,7 +149,7 @@ class Control {
         /**
          * barSVG
          */
-        const barSvg = this.root.append('div')
+        this.barSvg = this.root.append('div')
             .attr('id', 'bar')//tag used for CSS
             .style('width', `${barSize.width}px`)
             .style('height', `${barSize.height}px`)
@@ -160,7 +166,7 @@ class Control {
         /**
          * bubbleSVG
          */
-        const bubbleSvg = this.root.append('div')
+        this.bubbleSvg = this.root.append('div')
             .attr('id', 'bubble')//tag used for CSS
             .style('width', `${bubbleSize.width}px`)
             .style('height', `${bubbleSize.height}px`)
@@ -177,7 +183,7 @@ class Control {
         /**
          * radVizSVG
          */
-        const radVizSvg = this.root.append('div')
+        this.radVizSvg = this.root.append('div')
             .attr('id', 'radViz')//tag used for CSS
             .style('width', `${radVizSize.width}px`)
             .style('height', `${radVizSize.height}px`)
@@ -191,7 +197,18 @@ class Control {
             .attr('transform', `translate(${radVizSize.width/2}, ${radVizSize.width/2})`)
         ;
 
-
+        /**
+         * RESET BUTTON
+         */
+        this.root.append('button')
+            .attr('id', 'reset')//tag used for CSS
+            .style('position', 'absolute')// offset code added
+            .style('left', `${0}px`)// offset code added
+            .style('top', `${0}px`)// offset code added
+            .text('Reset')
+            .on('click', () => {
+                this.Render(this.data); // call the render method to create the visualizations
+            })
 
         /**
          * PUBLIC VARIABLES
@@ -200,68 +217,68 @@ class Control {
         /* 
         Define public variables that can be used with multiple classes
         */
-
         
+        ;       
+        
+        this.Render(data); // call the render method to create the visualizations
+    }
+
+
+    Render(data){
+        /*
+         * Render VISUALIZATION CLASSES
+         * 
+        Create the instance for each class here
+        Need to pass data, svg, size, and this control object to each class
+        For example, 
+            this.Pie = new Pie(data, this.svg, size, this);
+        */
+
+        d3.selectAll('.render').remove(); // remove all previous renderings
+
+        //append tags to make un-rendering easier
+        let render_pieSvg = this.pieSvg
+        .append('g')
+            .attr('id', 'pieRender')
+            .attr('class', 'render')
+        ;
+        let render_barSvg = this.barSvg
+        .append('g')
+            .attr('id', 'barRender')
+            .attr('class', 'render')
+        ;
+        let render_bubbleSvg = this.bubbleSvg
+        .append('g')
+            .attr('id', 'bubbleRender')
+            .attr('class', 'render')
+        ;
+        let render_radVizSvg = this.radVizSvg
+        .append('g')
+            .attr('id', 'radVizRender')
+            .attr('class', 'render')
         ;
 
 
-        /*
-         * INSTANTIATE VISUALIZATION CLASSES
-         * 
-        Create the instance for each class here
-        Need to pass data, size, and this control object to each class
-        For example, 
-            this.Pie = new Pie(data, svg, size, this);
-        Set up the CSS for size and layout in the style.css file
-        */
-
-        this.Bubble = new Bubble(data, bubbleSvg, unpaded_bubbleSize, this);
-        this.Pie = new Pie(data, pieSvg, unpaded_pieSize, this);
-        this.RadViz = new RadViz(data, radVizSvg, unpaded_radVizSize, this);
-        this.Bar = new Bar(data, barSvg, unpaded_barSize, this);
-        
+        new Bubble(data, render_bubbleSvg, unpaded_bubbleSize, this);
+        new Pie(data, render_pieSvg, unpaded_pieSize, this);
+        new RadViz(data, render_radVizSvg, unpaded_radVizSize, this);
+        new Bar(data, render_barSvg, unpaded_barSize, this);
     }
 
 
-
-    // /**
-    //  * INTERACTION METHODS
-    //  */
-    // /* 
-    // Define methods here to respond to the mouse operation (will be called by each visualization class)
-    // When theses methods are called, call corresponding methods in each visualization class to update the chart
-    // */
+    /**
+     * INTERACTION METHODS
+     */
+    /* 
+    These methods are called from the visualization classes to update the data and redraw the visualizations
+    */
     
-    Select(variety){
-        if(this.Pie.highlightedColor!=variety){
-            this.Pie.Highlight(variety);
-            // this.PCord.Filter(variety); // Comment out or remove
-            this.RadViz.Filter(variety); 
-        }
-        else{
-            this.Pie.UnHighlight();
-            // this.PCord.UnFilter(); // Comment out or remove
-            this.RadViz.UnFilter();
-        }
+    filterByName(name){
+        const filteredData = this.data.filter(([key, value]) => value.name === name);
+        this.Render(filteredData);
     }
-
-    Highlight(index, variety){
-        //this.PCord.Highlight(index);
-        this.RadViz.Highlight(index);
-        this.Pie.Highlight(variety);
+    filterByLanguage(lang){
+        const filteredData = this.data.filter((dataItem) => dataItem.primary_language === lang);
+        this.Render(filteredData);
     }
-
-    UnHighlight(){
-        //this.PCord.UnHighlight();
-        this.RadViz.UnHighlight();
-        this.Pie.UnHighlight();
-    }
-
-    // ShowParallelCordsTooltip(d){
-    //     this.PCord.ShowTooltip(d);
-    // }
-
-    // HideParallelCordsTooltip(){
-    //     this.PCord.HideTooltip();
-    // }
 }

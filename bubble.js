@@ -101,7 +101,11 @@ class Bubble {
           event.subject.fx = null;
           event.subject.fy = null;
         })
-      );
+      )
+      //Filter for language with a double click //added by zach st
+      .on("dblclick", (event, d) => {
+          con.filterByLanguage(d.language);
+      });
 
     // Add a search box for highlighting bubbles
     const searchBox = this.svg.append('foreignObject')
