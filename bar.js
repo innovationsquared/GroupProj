@@ -92,7 +92,11 @@ class Bar {
             .attr('y', d=>yScale(d[1]))
             .attr('width', xScale.bandwidth())
             .attr('height', d=> height - yScale(d[1]))
-            .attr('fill', d => colorScale(d[0]));
+            .attr('fill', d => colorScale(d[0]))
+            // double click to filter by license added Zach StPierre
+            .on('dblclick', (event, d) => {
+                this.control.filterByLicense(d[0]);
+            });
         svg.selectAll('text.count-label')
             .data(licenseCounts)
             .enter()

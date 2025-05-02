@@ -59,9 +59,13 @@ class Pie {
                     .style('stroke-width', '2px');
                 tooltip.style('opacity', 0);
             })
-            .on('click', (event, d) => {
-                this.con.Select(d.data[0]);
-            });
+            // .on('click', (event, d) => {
+            //     this.con.Select(d.data[0]);
+            // })
+            .on('dblclick', (event, d) => {
+                this.con.filterByLanguage(d.data[0]);
+            })
+            
 
         const labelArc = d3.arc()
             .innerRadius(arc.outerRadius()() * 0.6)

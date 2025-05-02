@@ -240,6 +240,7 @@ class Control {
         */
 
         d3.selectAll('.render').remove(); // remove all previous renderings
+        d3.selectAll('.tooltip').remove(); // remove all previous tooltips
 
         //append tags to make un-rendering easier
         let render_pieSvg = this.pieSvg
@@ -282,8 +283,16 @@ class Control {
         const filteredData = this.data.filter((dataItem) => dataItem.name === name);
         this.Render(filteredData);
     }
-    filterByLanguage(lang){
+    filterByLanguagesUsed(lang){
         const filteredData = this.data.filter((dataItem) => dataItem.languages_used.includes(lang));
+        this.Render(filteredData);
+    }
+    filterByLanguage(lang){
+        const filteredData = this.data.filter((dataItem) => dataItem.primary_language === lang);
+        this.Render(filteredData);
+    }
+    filterByLicense(license){
+        const filteredData = this.data.filter((dataItem) => dataItem.licence === license);
         this.Render(filteredData);
     }
 }

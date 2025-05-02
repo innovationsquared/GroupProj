@@ -104,7 +104,7 @@ class Bubble {
       )
       //Filter for language with a double click //added by zach st
       .on("dblclick", (event, d) => {
-          con.filterByLanguage(d.language);
+          con.filterByLanguagesUsed(d.language);
       });
 
     // Add a search box for highlighting bubbles
