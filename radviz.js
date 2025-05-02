@@ -87,7 +87,7 @@ class RadViz {
         const legend = svg
             .append('g')
             .attr('class', 'legend')
-            .attr('transform', `translate(${-size.width/2 + size.margin}, ${-size.height/2 + size.margin})`);
+            .attr('transform', `translate(${-size.width/2}, ${-size.height/2})`);
 
             legend.selectAll('rect')
             .data(legendData)

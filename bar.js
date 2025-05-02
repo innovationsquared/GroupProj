@@ -44,7 +44,6 @@ class Bar {
 
         const width = this.size.width;
         const height = this.size.height;
-        const margin = this.size.margin
 
         const licenseCounts = d3.rollups(
             //these dumb brits spell license wrong
@@ -58,12 +57,12 @@ class Bar {
         console.log(licenseCounts);
         const xScale = d3.scaleBand()
             .domain(licenses)
-            .range([margin, width - margin])
+            .range([0, width])
             .padding(0.2);
 
         const yScale = d3.scaleLinear()
             .domain([0,d3.max(counts)])
-            .range([height - height/4, 0]);
+            .range([height, 0]);
 
         const colorScale = d3.scaleOrdinal()
             .domain(licenses)
@@ -73,7 +72,7 @@ class Bar {
         const yAxis = d3.axisLeft(yScale);
 
         svg.append('g')
-            .attr('transform', `translate(${0}, ${height - height/4})`)  
+            .attr('transform', `translate(${0}, ${height})`)  
             .call(xAxis)
             .selectAll('text')
             .attr("transform", `rotate(${-30})`)
@@ -82,7 +81,7 @@ class Bar {
 
 
         svg.append('g')
-            .attr('transform', `translate(${margin},${0})`)
+            .attr('transform', `translate(${0},${0})`)
             .call(yAxis);
 
         svg.selectAll('rect')
@@ -92,7 +91,7 @@ class Bar {
             .attr('x', d=>xScale(d[0]))
             .attr('y', d=>yScale(d[1]))
             .attr('width', xScale.bandwidth())
-            .attr('height', d=> height - height/4 - yScale(d[1]))
+            .attr('height', d=> height - yScale(d[1]))
             .attr('fill', d => colorScale(d[0]));
         svg.selectAll('text.count-label')
             .data(licenseCounts)

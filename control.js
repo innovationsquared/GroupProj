@@ -3,36 +3,10 @@ class Control {
         /**
          * LAYOUT
          */
-        const size = {
-            /*
-            Define the size of the layout here
-            */
-            width: 1000,
-            height: 2000,
-            margin: 10,
 
-            pieSize:{
-                margin: 10,
-                width:500,
-                height:500
-            },
-            barSize:{
-                margin: 25,
-                width:1000,
-                height:500
-            },
-            bubbleSize:{
-                margin: 10,
-                width: 1000,
-                height:500
-            },
-            radVizSize:{
-                margin: 10,
-                width: 500,
-                height: 500
-            }
-        };
-
+        /**
+         * OFFSET of each visualization
+         */
         const offsets = {
             pie: {
                 top: 500,
@@ -52,15 +26,92 @@ class Control {
             }  
         }
 
+        /**
+         * layout Size
+         */
+        const size = {
+            /*
+            Define the size of the layout here
+            */
+            width: 1000,
+            height: 2000,
+            margin: 10
+        };
 
+        /**
+         * VIZUALIZATION SIZES 
+         */
+        const pieSize ={
+            width: size.width/2,
+            height: size.width/2
+        }
+        const barSize ={
+            width: size.width,
+            height: size.width/2
+        }
+        const bubbleSize ={
+            width: size.width,
+            height: size.width/2
+        }
+        const radVizSize ={
+            width: size.width/2,
+            height: size.width/2,
+        }
+
+        /**
+         * margins
+         */
+        const margins = {
+            pie:{
+                top: size.margin,
+                bottom : size.margin,
+                left: size.margin,
+                right : size.margin
+            },
+            bar:{
+                top: size.margin,
+                bottom : size.margin * 12,
+                left: size.margin * 2.5,
+                right : size.margin
+            },
+            bubble:{
+                top: size.margin,
+                bottom : size.margin,
+                left: size.margin,
+                right : size.margin
+            },
+            radViz:{
+                top: size.margin,
+                bottom : size.margin,
+                left: size.margin,
+                right : size.margin
+            }
+        }
+
+        /**
+         * unpaded sizes
+         */
+        const unpaded_pieSize ={
+            width: pieSize.width - margins.pie.left - margins.pie.right,
+            height: pieSize.height - margins.pie.top - margins.pie.bottom
+        }
+        const unpaded_barSize ={
+            width: barSize.width - margins.bar.left - margins.bar.right,
+            height: barSize.height - margins.bar.top - margins.bar.bottom,
+        }
+        const unpaded_bubbleSize ={
+            width: bubbleSize.width - margins.bubble.left - margins.bubble.right,
+            height: bubbleSize.height - margins.bubble.top - margins.bubble.bottom,
+        }
+        const unpaded_radVizSize ={
+            width: radVizSize.width - margins.radViz.left - margins.radViz.right,
+            height: radVizSize.height - margins.radViz.top - margins.radViz.bottom,
+        }
 
         /**
          * SVGS
          * using layout above
          */
-
-        // Create the root container, use <d3 selection>.style to set up the size in CSS
-        // It's a public variable. Other classes can access it to append their own div and svg
         
         /**
          * root
@@ -77,16 +128,16 @@ class Control {
          */
         const pieSvg = this.root.append('div')
             .attr('id', 'pie')//tag used for CSS
-            .style('width', `${size.pieSize.width}px`)
-            .style('height', `${size.pieSize.height}px`)
+            .style('width', `${pieSize.width}px`)
+            .style('height', `${pieSize.height}px`)
             .style('position', 'absolute')// offset code added
             .style('left', `${offsets.pie.left}px`)// offset code added
             .style('top', `${offsets.pie.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.pieSize.width)
-            .attr('height', size.pieSize.height)
+            .attr('width', pieSize.width)
+            .attr('height', pieSize.height)
         .append('g')        // origin to the center of the svg
-            .attr('transform', `translate(${size.pieSize.width/2}, ${size.pieSize.width/2})`)
+            .attr('transform', `translate(${pieSize.width/2}, ${pieSize.width/2})`)
         ;
 
         /**
@@ -94,16 +145,16 @@ class Control {
          */
         const barSvg = this.root.append('div')
             .attr('id', 'bar')//tag used for CSS
-            .style('width', `${size.barSize.width}px`)
-            .style('height', `${size.barSize.height}px`)
+            .style('width', `${barSize.width}px`)
+            .style('height', `${barSize.height}px`)
             .style('position', 'absolute')// offset code added
             .style('left', `${offsets.bar.left}px`)// offset code added
             .style('top', `${offsets.bar.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.barSize.width)
-            .attr('height', size.barSize.height)
+            .attr('width', barSize.width)
+            .attr('height', barSize.height)
         .append('g')        // origin to the margin offset of the svg
-            .attr('transform', `translate(${size.margin}, ${size.margin})`)
+            .attr('transform', `translate(${margins.bar.left}, ${margins.bar.top})`)
         ;
         
         /**
@@ -111,16 +162,16 @@ class Control {
          */
         const bubbleSvg = this.root.append('div')
             .attr('id', 'bubble')//tag used for CSS
-            .style('width', `${size.bubbleSize.width}px`)
-            .style('height', `${size.bubbleSize.height}px`)
+            .style('width', `${bubbleSize.width}px`)
+            .style('height', `${bubbleSize.height}px`)
             .style('position', 'absolute')// offset code added
             .style('left', `${offsets.bubble.left}px`)// offset code added
             .style('top', `${offsets.bubble.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.bubbleSize.width)
-            .attr('height', size.bubbleSize.height)
+            .attr('width', bubbleSize.width)
+            .attr('height', bubbleSize.height)
         .append('g')        // origin to the margin offset of the svg
-            .attr('transform', `translate(${size.margin}, ${size.margin})`)
+            .attr('transform', `translate(${margins.bubble.left}, ${margins.bubble.top})`)
         ;
         
         /**
@@ -128,16 +179,16 @@ class Control {
          */
         const radVizSvg = this.root.append('div')
             .attr('id', 'radViz')//tag used for CSS
-            .style('width', `${size.radVizSize.width}px`)
-            .style('height', `${size.radVizSize.height}px`)
+            .style('width', `${radVizSize.width}px`)
+            .style('height', `${radVizSize.height}px`)
             .style('position', 'absolute')// offset code added
             .style('left', `${offsets.radViz.left}px`)// offset code added
             .style('top', `${offsets.radViz.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.radVizSize.width)
-            .attr('height', size.radVizSize.height)
+            .attr('width', radVizSize.width)
+            .attr('height', radVizSize.height)
         .append('g')        // origin to the center of the svg
-            .attr('transform', `translate(${size.radVizSize.width/2}, ${size.radVizSize.width/2})`)
+            .attr('transform', `translate(${radVizSize.width/2}, ${radVizSize.width/2})`)
         ;
 
 
@@ -147,12 +198,10 @@ class Control {
          */
 
         /* 
-        Define public variables that can be used with multiple classes, such as color scale, dimension array
+        Define public variables that can be used with multiple classes
         */
 
-        // this.margin = Math.min(size.width, size.height) * 0.1; //margin size seems work with this
-        // this.color = d3.scaleOrdinal(d3.schemeCategory10);
-        // this.dimensions = ["index","sepal.length","sepal.width","petal.length","petal.width","variety"]
+        
         ;
 
 
@@ -166,10 +215,10 @@ class Control {
         Set up the CSS for size and layout in the style.css file
         */
 
-        this.Bubble = new Bubble(data, bubbleSvg, size.bubbleSize, this);
-        // this.Pie = new Pie(data, pieSvg, size.pieSize, this);
-        this.RadViz = new RadViz(data, radVizSvg, size.radVizSize, this);
-        this.Bar = new Bar(data, barSvg, size.barSize, this);
+        this.Bubble = new Bubble(data, bubbleSvg, unpaded_bubbleSize, this);
+        // this.Pie = new Pie(data, pieSvg, unpaded_pieSize, this);
+        this.RadViz = new RadViz(data, radVizSvg, unpaded_radVizSize, this);
+        this.Bar = new Bar(data, barSvg, unpaded_barSize, this);
         
     }
 
