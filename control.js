@@ -17,8 +17,8 @@ class Control {
                 height:500
             },
             barSize:{
-                margin: 10,
-                width:500,
+                margin: 25,
+                width:1000,
                 height:500
             },
             bubbleSize:{
@@ -35,22 +35,21 @@ class Control {
 
         const offsets = {
             pie: {
-                top: 0,
+                top: 500,
                 left: 0
             },
             bar: {
                 top: 0,
-                left: 500
+                left: 0
             },
             bubble: {
-                top: 500,
+                top: 1000,
                 left: 0
             },
             radViz: {
-                top: 1000,
-                left: 0
-            }
-            
+                top: 500,
+                left: 500
+            }  
         }
 
 
@@ -84,8 +83,8 @@ class Control {
             .style('left', `${offsets.pie.left}px`)// offset code added
             .style('top', `${offsets.pie.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.pieSize.width+size.margin*2)
-            .attr('height', size.pieSize.height+size.margin*2)
+            .attr('width', size.pieSize.width)
+            .attr('height', size.pieSize.height)
         .append('g')        // origin to the center of the svg
             .attr('transform', `translate(${size.pieSize.width/2}, ${size.pieSize.width/2})`)
         ;
@@ -101,8 +100,8 @@ class Control {
             .style('left', `${offsets.bar.left}px`)// offset code added
             .style('top', `${offsets.bar.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.barSize.width+size.margin*2)
-            .attr('height', size.barSize.height+size.margin*2)
+            .attr('width', size.barSize.width)
+            .attr('height', size.barSize.height)
         .append('g')        // origin to the margin offset of the svg
             .attr('transform', `translate(${size.margin}, ${size.margin})`)
         ;
@@ -118,8 +117,8 @@ class Control {
             .style('left', `${offsets.bubble.left}px`)// offset code added
             .style('top', `${offsets.bubble.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.bubbleSize.width+size.margin*2)
-            .attr('height', size.bubbleSize.height+size.margin*2)
+            .attr('width', size.bubbleSize.width)
+            .attr('height', size.bubbleSize.height)
         .append('g')        // origin to the margin offset of the svg
             .attr('transform', `translate(${size.margin}, ${size.margin})`)
         ;
@@ -135,8 +134,8 @@ class Control {
             .style('left', `${offsets.radViz.left}px`)// offset code added
             .style('top', `${offsets.radViz.top}px`)// offset code added
         .append('svg')
-            .attr('width', size.radVizSize.width+size.margin*2)
-            .attr('height', size.radVizSize.height+size.margin*2)
+            .attr('width', size.radVizSize.width)
+            .attr('height', size.radVizSize.height)
         .append('g')        // origin to the center of the svg
             .attr('transform', `translate(${size.radVizSize.width/2}, ${size.radVizSize.width/2})`)
         ;

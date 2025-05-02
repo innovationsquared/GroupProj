@@ -229,4 +229,15 @@ class RadViz {
                     .attr('opacity', 0.5);  // Reset opacity when mouse leaves
             });
     }
+
+    /*
+     * PUBLIC METHODS
+     */
+
+    /*
+     * used to filter the data based on the selected language from other visualizations
+     */
+    filterLang(lang){
+        
+    }
 }
