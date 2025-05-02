@@ -283,7 +283,7 @@ class Control {
         this.Render(filteredData);
     }
     filterByLanguage(lang){
-        const filteredData = this.data.filter((dataItem) => dataItem.primary_language === lang);
+        const filteredData = this.data.filter((dataItem) => dataItem.languages_used.includes(lang));
         this.Render(filteredData);
     }
 }
