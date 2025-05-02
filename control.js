@@ -216,7 +216,7 @@ class Control {
         */
 
         this.Bubble = new Bubble(data, bubbleSvg, unpaded_bubbleSize, this);
-        // this.Pie = new Pie(data, pieSvg, unpaded_pieSize, this);
+        this.Pie = new Pie(data, pieSvg, unpaded_pieSize, this);
         this.RadViz = new RadViz(data, radVizSvg, unpaded_radVizSize, this);
         this.Bar = new Bar(data, barSvg, unpaded_barSize, this);
         
@@ -224,44 +224,44 @@ class Control {
 
 
 
-    // /**
-    //  * INTERACTION METHODS
-    //  */
-    // /* 
-    // Define methods here to respond to the mouse operation (will be called by each visualization class)
-    // When theses methods are called, call corresponding methods in each visualization class to update the chart
-    // */
+    /**
+     * INTERACTION METHODS
+     */
+    /* 
+    Define methods here to respond to the mouse operation (will be called by each visualization class)
+    When theses methods are called, call corresponding methods in each visualization class to update the chart
+    */
     
-    // Select(variety){
-    //     if(this.Pie.highlightedColor!=variety){
-    //         this.Pie.Highlight(variety);
-    //         this.PCord.Filter(variety);
-    //         this.RadViz.Filter(variety);
-    //     }
-    //     else{
-    //         this.Pie.UnHighlight();
-    //         this.PCord.UnFilter();
-    //         this.RadViz.UnFilter();
-    //     }
-    // }
+    Select(variety){
+        if(this.Pie.highlightedColor!=variety){
+            this.Pie.Highlight(variety);
+            this.PCord.Filter(variety);
+            this.RadViz.Filter(variety);
+        }
+        else{
+            this.Pie.UnHighlight();
+            this.PCord.UnFilter();
+            this.RadViz.UnFilter();
+        }
+    }
 
-    // Highlight(index, variety){
-    //     this.PCord.Highlight(index);
-    //     this.RadViz.Highlight(index);
-    //     this.Pie.Highlight(variety);
-    // }
+    Highlight(index, variety){
+        this.PCord.Highlight(index);
+        this.RadViz.Highlight(index);
+        this.Pie.Highlight(variety);
+    }
 
-    // UnHighlight(){
-    //     this.PCord.UnHighlight();
-    //     this.RadViz.UnHighlight();
-    //     this.Pie.UnHighlight();
-    // }
+    UnHighlight(){
+        this.PCord.UnHighlight();
+        this.RadViz.UnHighlight();
+        this.Pie.UnHighlight();
+    }
 
-    // ShowParallelCordsTooltip(d){
-    //     this.PCord.ShowTooltip(d);
-    // }
+    ShowParallelCordsTooltip(d){
+        this.PCord.ShowTooltip(d);
+    }
 
-    // HideParallelCordsTooltip(){
-    //     this.PCord.HideTooltip();
-    // }
+    HideParallelCordsTooltip(){
+        this.PCord.HideTooltip();
+    }
 }
