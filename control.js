@@ -246,22 +246,22 @@ class Control {
     }
 
     Highlight(index, variety){
-        this.PCord.Highlight(index);
+        //this.PCord.Highlight(index);
         this.RadViz.Highlight(index);
         this.Pie.Highlight(variety);
     }
 
     UnHighlight(){
-        this.PCord.UnHighlight();
+        //this.PCord.UnHighlight();
         this.RadViz.UnHighlight();
         this.Pie.UnHighlight();
     }
 
-    ShowParallelCordsTooltip(d){
-        this.PCord.ShowTooltip(d);
-    }
+    // ShowParallelCordsTooltip(d){
+    //     this.PCord.ShowTooltip(d);
+    // }
 
-    HideParallelCordsTooltip(){
-        this.PCord.HideTooltip();
-    }
+    // HideParallelCordsTooltip(){
+    //     this.PCord.HideTooltip();
+    // }
 }
