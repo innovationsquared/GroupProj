@@ -227,6 +227,10 @@ class RadViz {
                 svg.selectAll('.tooltip').remove();  // Remove tooltip on mouseout
                 svg.selectAll('circle.repo')
                     .attr('opacity', 0.5);  // Reset opacity when mouse leaves
+            })
+            // filter event for item double clicked on added by zach st
+            .on('dblclick', (event, d) => {
+                con.filterByName(d.name); // filter by name
             });
     }
 

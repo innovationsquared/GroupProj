@@ -1,4 +1,9 @@
 /**
+ * Control Class
+ * Written by: [Zachary StPierre]
+ */
+
+/**
  * LAYOUT
  */
 
@@ -274,7 +279,7 @@ class Control {
     */
     
     filterByName(name){
-        const filteredData = this.data.filter(([key, value]) => value.name === name);
+        const filteredData = this.data.filter((dataItem) => dataItem.name === name);
         this.Render(filteredData);
     }
     filterByLanguage(lang){
