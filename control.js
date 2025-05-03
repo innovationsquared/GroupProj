@@ -1,34 +1,11 @@
 /**
  * Control Class
- * Written by: [Zachary StPierre]
+ * Written by: Zachary StPierre
  */
 
 /**
  * LAYOUT
  */
-
-/**
- * OFFSET of each element
- */
-const HeaderHeight = 50; // height of the header
-const offsets = {
-    pie: {
-        top: HeaderHeight+500,
-        left: 0
-    },
-    bar: {
-        top: HeaderHeight+0,
-        left: 0
-    },
-    bubble: {
-        top:HeaderHeight+1000,
-        left: 0
-    },
-    radViz: {
-        top: HeaderHeight+500,
-        left: 500
-    }  
-}
 
 /**
  * layout Size
@@ -37,7 +14,7 @@ const size = {
     /*
     Define the size of the layout here
     */
-    width: 1000,
+    width: 1750,
     height: 2000,
     margin: 10
 };
@@ -46,20 +23,43 @@ const size = {
  * VIZUALIZATION SIZES 
  */
 const pieSize ={
-    width: size.width/2,
-    height: size.width/2
+    width: size.width/3,
+    height: size.width/3
 }
 const barSize ={
-    width: size.width,
-    height: size.width/2
+    width: size.width*2/3,
+    height: size.width/3
 }
 const bubbleSize ={
-    width: size.width,
-    height: size.width/2
+    width: size.width*2/3,
+    height: size.width/3
 }
 const radVizSize ={
-    width: size.width/2,
-    height: size.width/2,
+    width: size.width/3,
+    height: size.width/3,
+}
+
+/**
+ * OFFSET of each element
+ */
+const HeaderHeight = 25; // height of the header
+const offsets = {
+    pie: {
+        top: HeaderHeight+0,
+        left: barSize.width
+    },
+    bar: {
+        top: HeaderHeight+0,
+        left: 0
+    },
+    bubble: {
+        top:HeaderHeight+barSize.height,
+        left: 0
+    },
+    radViz: {
+        top: HeaderHeight+pieSize.height,
+        left: bubbleSize.width
+    }  
 }
 
 /**
